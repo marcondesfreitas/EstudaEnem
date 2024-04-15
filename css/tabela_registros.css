@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Tilt+Warp&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+
+table {
+  margin-top: -40px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #cceeff;
+}
+
+#botao {
+  background: rgb(255, 255, 255);
+  border-color: rgb(13, 166, 255);
+  font-size: 14px;
+  border-radius: 40px;
+  padding: 5px;
+  width: 50%;
+  color: rgb(13, 166, 255);
+  transition: 0.2s;
+  margin-left: 25%;
+}
+
+#botao a {
+  text-decoration: none;
+  color: rgb(112, 202, 255);
+}
+
+#botao:hover {
+  background: rgb(0, 132, 255);
+  border-color: rgb(13, 78, 255);
+  font-size: 14px;
+  border-radius: 40px;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  transition: 0.1s;
+  box-shadow: 2px 2px 5px rgb(13, 166, 255);
+}
+
+@media screen and (min-width: 768px) {
+  #botao{
+   height: 60px;
+  }
+}

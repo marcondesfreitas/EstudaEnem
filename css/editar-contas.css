@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'Signika Negative', sans-serif;
+}
+header{
+    background: #4f5add;
+}
+
+
+
+h1{
+align-items: center;
+margin-left: 40.9%;
+padding: 12px;
+}
+
+table{
+    max-width: 90%;
+    margin-left: 70px;
+}
+
+
+th{
+    background-color: #2935b6;
+}
+
+td[id='1']{
+    background: #4f5add;
+}
+
+a{
+    color: rgb(255, 255, 255);
+    background: #2935b6;
+    border-radius: 20px;
+    border: 1px solid #2935b6;
+    margin-left: 45%;
+    padding: 12px;
+    padding-right: 3%;
+    padding-left: 3%;
+    transition: 0.2s;
+}
+
+a:hover{
+    background-color: #4f5add;
+    border: 1px solid #4f5add;
+    padding-right: 3.4%;
+    padding-left: 3.4%;
+    transition: 0.2s;
+}
+
+.edit{
+   background: #2935b6;
+   font-size: 14px;
+   padding: 6px;
+   margin-right: 1px;
+}

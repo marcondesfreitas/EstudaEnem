@@ -1,0 +1,94 @@
+.fild{
+    width: 700px;
+    border-radius: 20px;
+    height: 500px;
+    margin-left: 24.5%;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 7%;
+    background: white;
+    box-shadow: 10px 10px 30px rgb(116, 116, 116);
+    border: none;
+    text-align: center;
+}
+
+.id{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-color: rgb(182, 182, 182);
+    width: 350px;
+    outline: none;
+    margin-top: 20px;
+}
+
+.email{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-color: rgb(182, 182, 182);
+    width: 350px;
+    outline: none;
+}
+
+.senha{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-color: rgb(182, 182, 182);
+    width: 350px;
+    outline: none;
+}
+
+.numero{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-color: rgb(182, 182, 182);
+    width: 350px;
+    outline: none;
+}
+
+h1{
+    margin-top: 35px;
+    font-size: 40px;
+    color: rgb(48, 192, 236);
+    text-align: center;
+}
+
+h2{
+    color: rgb(0, 102, 255);
+}
+
+.hr1{
+    color:  rgb(182, 182, 182);
+    width: 300px;
+    margin-top: -20px;
+}
+
+.btn{
+    background: rgb(255, 255, 255);
+    border-color: rgb(13, 166, 255);
+    font-size: 14px;
+    border-radius: 40px;
+    padding: 5px;
+    width: 50%;
+    color: rgb(13, 166, 255);
+    transition: 0.2s;
+    margin-top: 20px;
+}
+.btn:hover{
+    
+    background: rgb(0, 132, 255);
+    border-color: rgb(13, 78, 255);
+    font-size: 14px;
+    border-radius: 40px;
+    padding: 5px;
+    width: 60%;
+    color: rgb(255, 255, 255);
+    transition: 0.1s;
+    box-shadow: 2px 2px 5px rgb(13, 166, 255)
+}
+
+.btnn{
+    text-align: center;
+}
