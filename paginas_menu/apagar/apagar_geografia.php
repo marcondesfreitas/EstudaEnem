@@ -14,13 +14,14 @@ if(isset($_POST['id'])) {
   $id = $_POST['id'];
 
   // Executar a exclusão do post no banco de dados
-  $sql = "DELETE FROM geografia WHERE id = $id";
+  $sql = "DELETE FROM historia WHERE id = $id";
   $result = mysqli_query($conn, $sql);
   if ($result) {
-    header("location: ../htmls/geografia.php");
+    header("location: ../htmls/historia.php");
   } else {
     echo "Erro ao excluir o post: " . mysqli_error($conn);
   }
+ 
 }
 
 mysqli_close($conn); // fechar a conexão com o banco de dados

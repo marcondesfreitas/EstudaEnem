@@ -7,118 +7,54 @@ $database = "estudaenem";
 $conn = mysqli_connect($host, $user, $password, $database);
 
 $adm = 0;
+$logado = 0;
 
 session_start();
 
 if (isset($_POST['email']) && isset($_POST['senha'])) {
   $_SESSION['email'] = $_POST['email'];
   $_SESSION['senha'] = $_POST['senha'];
-} else {
-  if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
-    $_SESSION['email'] = $_SESSION['email'];
-    $_SESSION['senha'] = $_SESSION['senha'];
-  } else {
-    $_SESSION['email'] = null;
-    $_SESSION['senha'] = null;
-  }
 }
 
 if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
-
   $email = $_SESSION['email'];
   $senha = $_SESSION['senha'];
 
   $sql = "SELECT * FROM conta1 WHERE email='$email' AND senha='$senha'";
   $result = mysqli_query($conn, $sql);
-  $rowimg = mysqli_fetch_assoc($result);
-
-  $sql2 = "SELECT * FROM conta2 WHERE email='$email' AND senha='$senha'";
-  $result2 = mysqli_query($conn, $sql2);
-  $row = mysqli_fetch_assoc($result2);
 
   if (mysqli_num_rows($result) > 0) {
-
-    $sql = "SELECT * FROM conta1 WHERE email='$email'"; // Alteração aqui
-    $result = mysqli_query($conn, $sql);
-    if (!$result) {
-      die('Erro na consulta SQL: ' . mysqli_error($conn));
-    }
-
-    if (mysqli_num_rows($result) > 0) {
-      while ($row = mysqli_fetch_assoc($result)) {
-        // Exibir a imagem
-        $imagem = $row["imagem"];
-
-        echo '<div onclick="fildperfil()" id="foto_perfil_menu"><img class="foto_perfil" src="data:image/jpg;base64, ' . base64_encode($imagem) . '" /></div>';
-        echo '
-          <fieldset id="fieldset_perfil">
-            <ul>
-              <li><a href="./paginas/html/gerenciar_conta.php" class="link">GERENCIAR SUA CONTA</a></li>
-              <li><a href="./paginas/html/login.php" class="link">MUDAR DE CONTA</a></li>
-            </ul>
-          <button onclick="fechar()" id="fechar"><img src="./img/fechar.svg" class="fechar_img"></button>
-          </fieldset>';
-      }
-    }
-
-    $_SESSION['teste'] = mysqli_num_rows($result);
-  } else if (mysqli_num_rows($result2) > 0) {
-    $_SESSION['email'] = $_SESSION['email'];
-    $_SESSION['senha'] = $_SESSION['senha'];
-    $_SESSION['teste2'] = mysqli_num_rows($result2);
-
-    $sql = "SELECT * FROM conta2 WHERE email='$email'"; // Alteração aqui
-    $result = mysqli_query($conn, $sql);
-    if (!$result) {
-      die('Erro na consulta SQL: ' . mysqli_error($conn));
-    }
-
-    $user = 'false';
-
-    if (mysqli_num_rows($result) > 0) {
-      while ($row = mysqli_fetch_assoc($result)) {
-        // Exibir a imagem
-        $imagem = $row["imagem"];
-
-        echo '<div onclick="fildperfil()" id="foto_perfil_menu"><img class="foto_perfil" src="data:image/jpg;base64, ' . base64_encode($imagem) . '" /></div>';
-        echo '
-        <fieldset id="fieldset_perfil">
-          <ul>
-            <li><a href="./paginas/html/gerenciar_conta.php" class="link">GERENCIAR SUA CONTA</a></li>
-            <li><a href="./paginas/html/login.php" class="link">MUDAR DE CONTA</a></li>
-          </ul>
-        <button onclick="fechar()" id="fechar"><img src="./img/fechar.svg" class="fechar_img"></button>
-        </fieldset>';
-      }
-
-      
-    }
-
-    $adm = 1;
+    $row = mysqli_fetch_assoc($result);
+    $logado = 1;
   } else {
-    session_abort();
-    echo "<script>alert('Email ou senha incorretos');</script>";
+    $sql2 = "SELECT * FROM conta2 WHERE email='$email' AND senha='$senha'";
+    $result2 = mysqli_query($conn, $sql2);
+
+    if (mysqli_num_rows($result2) > 0) {
+      $row = mysqli_fetch_assoc($result2);
+      $logado = 1;
+      $adm = 1;
+    } else {
+      echo "<script>alert('Email ou senha incorretos');</script>";
+    }
   }
 }
 
-if (isset($_SESSION['email'])) {
-  if (!isset($_SESSION['teste'])) {
-    $_SESSION['teste'] = 0;
-  }
-  if (!isset($_SESSION['teste2'])) {
-    $_SESSION['teste2'] = 0;
-  }
-  if ($_SESSION['teste'] > 0) {
-    $user = 'true';
-  } else if ($_SESSION['teste2'] > 0) {
-  } else {
-    echo "<script>
-      alert('email ou senhas incorretos')
-    </script>";
-    header('location: ./paginas/html/login.php');
-  }
+if ($logado == 1) {
+  $imagem = $row["imagem"];
+  echo '<div onclick="fildperfil()" id="foto_perfil_menu"><img class="foto_perfil" src="data:image/jpg;base64, ' . base64_encode($imagem) . '" /></div>';
+  echo '
+      <fieldset id="fieldset_perfil">
+        <ul>
+          <li><a href="./paginas/html/gerenciar_conta.php" class="link">GERENCIAR SUA CONTA</a></li>
+          <li><a href="./paginas/html/login.php" class="link">MUDAR DE CONTA</a></li>
+        </ul>
+      <button onclick="fechar()" id="fechar"><img src="./img/fechar.svg" class="fechar_img"></button>
+      </fieldset>';
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -176,7 +112,9 @@ if (isset($_SESSION['email'])) {
             console.log('usuario');
           </script>
           ";
-        } else {
+        } 
+        
+        if ($logado != 1){
           echo "<a href='./paginas/html/login.php' class='botao_login_principal'>login</a>";
         }
         ?>
@@ -187,7 +125,7 @@ if (isset($_SESSION['email'])) {
     <ul class="ul1">
       <li><a id="conteudo" href="" class="humanas">Humanas</a>
         <ul>
-          <li><a id="dp-c" href="paginas_menu/htmls/historia.php">História</a></li>
+          <li><a id="dp-c" href="./paginas_menu/htmls/historia.php">História</a></li>
           <li><a id="dp-c" href="paginas_menu/htmls/geografia.php">Geografia</a></li>
           <li><a id="dp-c" href="paginas_menu/htmls/filosofia.php">Filosofia</a></li>
           <li><a id="dp-c" href="paginas_menu/htmls/sociologia.php">Sociologia</a></li>
@@ -203,8 +141,8 @@ if (isset($_SESSION['email'])) {
           <li><a id="dp-c" href="paginas_menu/htmls/EDfisica.php">ED.Fisica</a></li>
           <li><a id="dp-c" href="paginas_menu/htmls/portugues.php">Português</a></li>
           <li><a id="dp-c" href="paginas_menu/htmls/artes.php">Artes</a></li>
-          <li><a id="dp-c" href="paginas_menu/htmls/ingles.php">Ingles</a>
-          <li><a id="dp-c" href="paginas_menu/htmls/espanhol.php">Espanhol</a>
+          <li><a id="dp-c" href="paginas_menu/htmls/espanhol.php">Espanhol</a></li>
+          <li><a id="dp-c" href="paginas_menu/htmls/ingles.php">Ingles</a></li>
           </li>
         </ul>
       <li><a id="conteudo" href="paginas_menu/htmls/matematica.php" class="matematica">Matemática</a></li>
@@ -214,8 +152,6 @@ if (isset($_SESSION['email'])) {
       </li>
     </ul>
   </nav>
-  </center>
-  <!-- Aqui finaliza o código do menu drop-down  -->
   <?php include 'paginas/html/lista_posts.php'; ?>
   <script src="./js/script.js"></script>
 </body>

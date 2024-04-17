@@ -9,6 +9,30 @@ if (!$conn) {
   die("Falha na conexão: " . mysqli_connect_error());
 }
 
+if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
+
+  $email = $_SESSION['email'];
+  $senha = $_SESSION['senha'];
+
+  $sql2 = "SELECT * FROM conta2 WHERE email='$email' AND senha='$senha'";
+  $result2 = mysqli_query($conn, $sql2);
+  $row = mysqli_fetch_assoc($result2);
+
+  if (mysqli_num_rows($result2) > 0) {
+    $_SESSION['email'] = $_SESSION['email'];
+    $_SESSION['senha'] = $_SESSION['senha'];
+    $_SESSION['teste2'] = mysqli_num_rows($result2);
+
+    $sql = "SELECT * FROM conta2 WHERE email='$email'"; // Alteração aqui
+    $result = mysqli_query($conn, $sql);
+    if (!$result) {
+      die('Erro na consulta SQL: ' . mysqli_error($conn));
+    }
+    $adm = 1;
+
+    }
+  } 
+
 $sql = "SELECT * FROM biologia";
 $result = mysqli_query($conn, $sql);
 if (!$result) {
@@ -24,10 +48,43 @@ if (mysqli_num_rows($result) > 0) {
     }
     $imagem = $row["imagem"];
 
-    echo "<h1>" . $row["titulo"] . "  -  " . $row["subtitulo"] . ":</h1>";
-    echo "<div class='slrboy'>" . $row["conteudo"] . "</div>";
-    echo '<img class="imgggg" src="data:image/jpg;base64, '. base64_encode($imagem) . '" />';
-    echo "<hr class='linhaa'>"; 
+    echo"<div class='tudo'>";
+
+    echo "<div class='materia'>";
+
+    if($adm == 1){
+      echo "
+        <form action='../editar_pg/editar_biologia.php' method='post' style='display:inline;'>
+          <input type='hidden' name='id' value='" . $row["id"] . "'>
+          <button class='editarcont' type='submit'><img class='imagem_editar' src='../../img/lapis_conteudo.png' alt='lixeira'></button>
+        </form>
+        <form action='../apagar/apagar_biologia.php' method='post' style='display:inline;'>
+          <input type='hidden' name='id' value='" . $row["id"] . "'>
+          <button class='apagarcont' type='submit'><img class='imagem_apagar' src='../../img/lixeira_conteudo.png' alt='lixeira'></button>
+        </form>
+    ";
+    }else{
+      echo "
+      <script>
+        console.log('usr')
+      </script>
+    ";
+    }
+
+    echo "
+        <p class='titulo_conteudo'>" . $row["titulo"] . "  -  " . $row["subtitulo"] . ":</p>
+        <p class='materia_conteudo'>" . $row["conteudo"] . "</p>
+      ";
+
+    echo "</div>";
+
+    echo '
+      <div class="div_imagem_conteudo">
+        <img class="imagem_conteudo" src="data:image/jpg;base64, '. base64_encode($imagem) . '" />
+      </div>
+    '; 
+    echo "</div>";
+    echo "<hr class='linha_conteudo'>";
   }
 } else {
   echo 'Não há posts a serem exibidos.';

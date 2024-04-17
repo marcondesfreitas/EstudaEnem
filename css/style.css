@@ -529,6 +529,8 @@ h4 {
   float: right;
   position: absolute;
   background-color: white;
+  cursor: pointer;
+
 }
 
 .foto_perfil{
@@ -567,11 +569,14 @@ input[value="editar"] {
   height: 20%;
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 .fechar_img {
   width: 100%;
   height: 100%;
+  cursor: pointer;
+
 }
 
 @media screen and (max-width: 600px) {

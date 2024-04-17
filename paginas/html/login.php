@@ -36,7 +36,6 @@
                 <div class="fac"><img src="../../img/logofacebook.png" class="facebook" alt=""></div>
             </div>
         </fieldset>
-        <div class="casa"><a href="../../index.html"><img src="../../img/casa.png" class="casaa" alt=""></a></div>
-    <script src="../js/cadastro.js"></script>
+    <script src="../../js/login.js"></script>
 </body>
 </html>
